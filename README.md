@@ -9,6 +9,7 @@ In this toolbox you can find different C functions I remade for understand how t
 
 # Futur Updates
 
+  - Add main.c for all functions
   - Add Makefile for Linux compilation
   - Add CMakelists for Clion compilation
   - Add functions
