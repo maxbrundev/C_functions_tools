@@ -1,6 +1,8 @@
-#ifndef STRING_COMPARE
-#define SRING_COMPARE
+#pragma once
 
-int string_compare(char const* str1, char const* str2);
+#ifndef STRING_COMPARE
+#define STRING_COMPARE
+
+int string_compare(const char* p_stringA, const char* p_stringB);
 
 #endif

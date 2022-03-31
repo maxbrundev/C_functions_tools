@@ -1,35 +1,45 @@
-#include <stdio.h>
 #include "my_put_float.h"
-#include "my_put_number.h"
+
 #include "my_put_char.h"
+#include "my_put_number.h"
 
-void my_put_float(double num)
+unsigned int my_put_float(double p_number)
 {
-	int temp = num;
-	int div = 1;
+	int number = p_number;
+	unsigned int devider = 1;
 
-	if (temp < 0)
+	unsigned int count = 0;
+
+	if (number < 0)
 	{
-		my_put_char('-');
-		temp = -temp;
+		count += my_put_char('-');
+		number = -number;
 	}
 
-	while (temp / div > 9 || temp / div < -9)
-		div = div * 10;
-
-	while (div >= 1)
+	while (number / devider > 9)
 	{
-		if (temp > 0)
-			my_put_number((temp / div) % 10);
-		else
-			my_put_number((temp / div) % 10);
-		div = div / 10;
+		devider *= 10;
 	}
 
-	my_put_char('.');
+	while (devider > 0)
+	{
+		count += my_put_number((number / devider) % 10);
 
-	temp = num * 100;
+		devider /= 10;
+	}
 
-	my_put_number((temp / 10) % 10);
-	my_put_number((temp / 1) % 10);
+	count += my_put_char('.');
+
+	number = p_number * 100.0f;
+
+	if(number < 0)
+	{
+		number = -number;
+	}
+
+	count += my_put_number((number / 10) % 10);
+
+	count += my_put_number((number / 1) % 10);
+
+	return count;
 }

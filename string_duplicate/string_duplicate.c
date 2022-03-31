@@ -1,25 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "string_duplicate.h"
+
+#include <stdlib.h>
+
 #include "string_length.h"
 
-char* string_duplicate(char const* str)
+char* string_duplicate(const char* p_string)
 {
-	int a;
-	char* str_ptr = NULL;
+	const unsigned int length = string_length(p_string);
 
-	if(str == NULL)
-		return NULL;
+	char* result = (char*)malloc(sizeof(char) * (length + 1));
 
-	str_ptr = malloc(string_length(str) * sizeof(char));
-
-	if(str_ptr == NULL)
-		return NULL;
-
-	for (a = 0; str[a] != '\0'; a++)
+	for (unsigned int i = 0; i < length; i++)
 	{
-		str_ptr[a] = str[a];
+		result[i] = p_string[i];
 	}
-	str_ptr[a] = '\0';
-	return str_ptr;
+
+	result[length] = '\0';
+
+	return result;
 }

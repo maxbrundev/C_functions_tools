@@ -1,49 +1,45 @@
-#include <stdlib.h>
 #include "int_to_alpha.h"
 
-char* int_to_alpha(int num)
+#include <stdlib.h>
+
+char* int_to_alpha(int p_number)
 {
-	if (num == INT_MIN)
-		return "-2147483648";
+	char* result = NULL;
 
-	unsigned short int numLength;
-	unsigned short int stringLength = 1;
-	char positive = 1;
-	unsigned short int buffPos = 0;
-	int tempNum = num;
+	unsigned int stringLength = 0;
+	unsigned int devider      = 1;
+	unsigned int bufferIndex  = 0;
+	unsigned int isNegative   = 0;
 
-	if (tempNum < 0)
+	if(p_number < 0)
 	{
-		num = -num;
-		positive = 0;
-		++stringLength;
+		p_number = -p_number;
+		stringLength++;
+
+		isNegative = 1;
 	}
 
-	tempNum = num;
-	while (tempNum > 9)
+	while(p_number / devider > 9)
 	{
-		tempNum /= 10;
-		++stringLength;
+		devider *= 10;
+		stringLength++;
+	}
+	stringLength++;
+
+	result = (char*)malloc(sizeof(char) * (stringLength + 1));
+
+	if(isNegative)
+	{
+		result[bufferIndex++] = '-';
 	}
 
-	numLength = stringLength - (1 - positive);
-
-	char* result = (char*)malloc(sizeof(char)*stringLength);
-
-	if (!positive)
-		result[buffPos++] = '-';
-
-	for (unsigned int i = 0; i < numLength; i++)
+	while(bufferIndex < stringLength)
 	{
-		unsigned int count = 0;
-		for (tempNum = num; tempNum >= 10; tempNum /= 10)
-			++count;
-		int toSubstract = tempNum;
-		for (unsigned int u = 0; u < count; u++)
-			toSubstract *= 10;
-		num -= toSubstract;
-		result[buffPos++] = tempNum + 48;
+		result[bufferIndex++] = '0' + (p_number / devider) % 10;
+		devider /= 10;
 	}
-	result[buffPos] = '\0';
+
+	result[stringLength] = '\0';
+
 	return result;
 }

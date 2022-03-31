@@ -1,19 +1,27 @@
-#include <stdio.h>
 #include "string_sized_copy.h"
 
-char* string_sized_copy(char* dest, char const* src, unsigned int size_max)
+#include "string_length.h"
+
+char* string_sized_copy(const char* p_source, char* p_dest, unsigned int p_sizeMax)
 {
-	unsigned int a = 0;
+	const unsigned int sourceSize = string_length(p_source);
 
-	if(dest == NULL)
-		return NULL;
-
-	if(src == NULL || size_max == 0)
-		return dest;
-
-	for( a = 0; a <= size_max ; a++)
+	for (unsigned int i = 0; i < p_sizeMax; i++)
 	{
-		dest[a] = src[a];
+		if(i > sourceSize)
+		{
+			p_dest[i] = '\0';
+		}
+		else
+		{
+			p_dest[i] = p_source[i];
+		}
 	}
-  return dest;
+
+	if (sourceSize == p_sizeMax)
+	{
+		p_dest[p_sizeMax] = '\0';
+	}
+
+	return p_dest;
 }
