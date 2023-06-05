@@ -2,26 +2,24 @@
 
 #include "string_length.h"
 
-char* string_sized_copy(const char* p_source, char* p_dest, unsigned int p_sizeMax)
+char* string_sized_copy(char* p_destination, const char* p_source, size_t p_length)
 {
-	const unsigned int sourceSize = string_length(p_source);
+	const size_t sourceLength = string_length(p_source);
 
-	for (unsigned int i = 0; i < p_sizeMax; i++)
+	for (size_t i = 0; i < p_length; i++)
 	{
-		if(i > sourceSize)
+		if(i < sourceLength)
 		{
-			p_dest[i] = '\0';
+			p_destination[i] = p_source[i];
 		}
 		else
 		{
-			p_dest[i] = p_source[i];
+			p_destination[i] = '\0';
 		}
 	}
 
-	if (sourceSize == p_sizeMax)
-	{
-		p_dest[p_sizeMax] = '\0';
-	}
-
-	return p_dest;
+	if(sourceLength == p_length)
+		p_destination[p_length] = '\0';
+	
+	return p_destination;
 }

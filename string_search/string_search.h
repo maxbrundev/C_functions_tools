@@ -3,6 +3,7 @@
 #ifndef STRING_SEARCH
 #define STRING_SEARCH
 
-char* string_search(char* p_string, char p_char);
+char* string_search(const char* p_string, int p_searchedChar);
+char* string_reverse_search(const char* p_string, int p_searchedChar);
 
 #endif

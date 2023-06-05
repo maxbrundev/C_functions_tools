@@ -3,6 +3,6 @@
 #ifndef STRING_CONCATENATE
 #define STRING_CONCATENATE
 
-char* string_concatenate(const char* p_source, char* p_dest);
+char* string_concatenate(char* p_destination, const char* p_source);
 
 #endif
